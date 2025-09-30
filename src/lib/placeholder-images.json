@@ -1,3 +1,64 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "Two people practicing judo in a dojo.",
+      "imageUrl": "https://images.unsplash.com/photo-1728498942768-b0b86d368ce5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxqdWRvJTIwbGVzc29ufGVufDB8fHx8MTc1OTIzMjY3Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "judo lesson"
+    },
+    {
+      "id": "update-1",
+      "description": "Person working out with dumbbells.",
+      "imageUrl": "https://images.unsplash.com/photo-1535743686920-55e4145369b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmaXRuZXNzJTIwdHJhaW5pbmd8ZW58MHx8fHwxNzU5MjMyNjc2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fitness training"
+    },
+    {
+      "id": "update-2",
+      "description": "Woman in a martial arts stance.",
+      "imageUrl": "https://images.unsplash.com/photo-1514050566906-8d077bae7046?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtYXJ0aWFsJTIwYXJ0c3xlbnwwfHx8fDE3NTkxNDg0MTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "martial arts"
+    },
+    {
+      "id": "update-3",
+      "description": "Man performing a high kick.",
+      "imageUrl": "https://images.unsplash.com/photo-1679758992949-93e19e213d71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzZWxmJTIwZGVmZW5zZXxlbnwwfHx8fDE3NTkyMzI2NzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "self defense"
+    },
+    {
+      "id": "mission-portrait",
+      "description": "Portrait of a person with nunchucks.",
+      "imageUrl": "https://images.unsplash.com/photo-1602827115146-853fa12ba155?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtYXJ0aWFsJTIwYXJ0aXN0fGVufDB8fHx8MTc1OTEzMDU3OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "martial artist"
+    },
+    {
+      "id": "mission-action",
+      "description": "Man doing a push-up.",
+      "imageUrl": "https://images.unsplash.com/photo-1514512364185-4c2b0985be01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwdXNoJTIwdXB8ZW58MHx8fHwxNzU5MjA1MTkzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "push up"
+    },
+    {
+      "id": "event-1",
+      "description": "A healthy meal with fruits and vegetables.",
+      "imageUrl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxoZWFsdGh5JTIwZm9vZHxlbnwwfHx8fDE3NTkxNTIxNTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "healthy food"
+    },
+    {
+      "id": "event-2",
+      "description": "A person writing a workout plan on a clipboard.",
+      "imageUrl": "https://images.unsplash.com/photo-1758875568756-37a9c5c1a4f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx3b3Jrb3V0JTIwcGxhbnxlbnwwfHx8fDE3NTkyMzI2NzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "workout plan"
+    },
+    {
+      "id": "event-3",
+      "description": "Two people sparring in a self-defense class.",
+      "imageUrl": "https://images.unsplash.com/photo-1711825049856-24a93ae9de23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzcGFycmluZyUyMHByYWN0aWNlfGVufDB8fHx8MTc1OTIzMjY3Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sparring practice"
+    },
+    {
+      "id": "author-eitan-kagan",
+      "description": "Portrait of Eitan Kagan",
+      "imageUrl": "https://images.unsplash.com/photo-1715029005043-e88d219a3c48?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bWFuJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzU5MTcxOTc1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man portrait"
+    }
+  ]
 }
