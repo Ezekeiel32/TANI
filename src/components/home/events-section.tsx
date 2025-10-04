@@ -42,7 +42,7 @@ export default function EventsSection() {
           {events.map((event) => (
             <Card key={event.id} className="flex flex-col overflow-hidden">
               {event.image && (
-                <div className="aspect-h-9 aspect-w-16 relative">
+                <div className="aspect-video relative">
                   <Image
                     src={event.image.imageUrl}
                     alt={event.image.description}

@@ -54,7 +54,7 @@ export default function UpdatesSection() {
           {posts.map((post) => (
             <div key={post.id} className="bg-card p-4 rounded-lg shadow-md transition-shadow hover:shadow-xl">
               {post.image && (
-                <div className="mb-4 aspect-h-9 aspect-w-16">
+                <div className="mb-4 aspect-video relative">
                   <Image
                     className="rounded-lg object-cover"
                     src={post.image.imageUrl}

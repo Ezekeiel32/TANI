@@ -8,10 +8,12 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <UpdatesSection />
-      <MissionSection />
-      <EventsSection />
-      <ConnectSection />
+      <div className="relative z-10 pt-[100vh]">
+        <UpdatesSection />
+        <MissionSection />
+        <EventsSection />
+        <ConnectSection />
+      </div>
     </>
   );
 }

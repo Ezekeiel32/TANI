@@ -28,7 +28,7 @@ export default function MissionSection() {
           <div className="md:order-1 grid grid-cols-2 gap-4 items-center">
             {missionAction && (
               <div className="col-span-2 sm:col-span-1">
-                <div className="aspect-w-3 aspect-h-4">
+                <div className="aspect-[3/4] relative">
                   <Image
                     src={missionAction.imageUrl}
                     alt={missionAction.description}
@@ -41,7 +41,7 @@ export default function MissionSection() {
             )}
             {missionPortrait && (
               <div className="col-span-2 sm:col-span-1">
-                <div className="aspect-w-1 aspect-h-1">
+                <div className="aspect-square relative">
                   <Image
                     src={missionPortrait.imageUrl}
                     alt={missionPortrait.description}

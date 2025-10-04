@@ -18,52 +18,39 @@ export default function HeroSection() {
   }, [images.length]);
 
   return (
-    <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden bg-black">
-      {/* Debug indicator */}
-      <div className="absolute top-4 left-4 bg-red-500 text-white p-2 rounded z-40 text-sm">
-        Current: {currentImageIndex + 1} of {images.length}
-      </div>
+    <section className="fixed top-0 left-0 w-full h-screen overflow-hidden bg-black z-0">
 
-      {/* Render all images but only show current one */}
-      {images.map((image, index) => {
-        const isVisible = index === currentImageIndex;
-        console.log(`Image ${index}: visible=${isVisible}, opacity=${isVisible ? 1 : 0}, zIndex=${isVisible ? 1 : -1}`);
-
-        return (
-          <div
-            key={image.id}
-            className="absolute inset-0 bg-green-500" // Temporary: show canvas is positioned
-            style={{
-              opacity: isVisible ? 1 : 0,
-              zIndex: isVisible ? 1 : -2, // Changed to -2
-              transition: 'opacity 1s ease-in-out',
-              pointerEvents: isVisible ? 'auto' : 'none',
-              display: isVisible ? 'block' : 'none' // Add display none for hidden images
-            }}
-          >
-            <Image
-              src={image.imageUrl}
-              alt={image.description}
-              fill
-              sizes="100vw"
-              className="object-cover object-center"
-              priority={index === 0}
-            />
-          </div>
-        );
-      })}
+      {/* Render only the current image */}
+      {images[currentImageIndex] && (
+        <div
+          key={`${images[currentImageIndex].id}-${currentImageIndex}`}
+          className="absolute inset-0"
+          style={{
+            transition: 'opacity 1s ease-in-out',
+          }}
+        >
+          <Image
+            src={images[currentImageIndex].imageUrl}
+            alt={images[currentImageIndex].description}
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+            priority={currentImageIndex === 0}
+          />
+        </div>
+      )}
 
       {/* Content Overlay */}
       <div className="relative z-10 h-full flex items-center justify-center">
         <div className="text-center text-white p-4 max-w-4xl mx-auto">
           <h1
-            className="text-5xl md:text-7xl lg:text-8xl font-headline font-extrabold tracking-tight leading-tight mb-4"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-headline font-extrabold tracking-tight leading-tight mb-4 px-4"
             style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}
           >
             Master Your Skills
           </h1>
           <p
-            className="text-xl md:text-2xl text-slate-200 mb-8"
+            className="text-lg sm:text-xl md:text-2xl text-slate-200 mb-8 px-4"
             style={{ textShadow: '1px 1px 6px rgba(0,0,0,0.8)' }}
           >
             Personalized Training for Self-Defense and Fitness
