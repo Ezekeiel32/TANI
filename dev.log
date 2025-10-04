@@ -1,0 +1,14 @@
+nohup: ignoring input
+
+> nextn@0.1.0 dev
+> next dev --turbopack -p 9002
+
+   ▲ Next.js 15.3.3 (Turbopack)
+   - Local:        http://localhost:9002
+   - Network:      http://192.168.1.151:9002
+
+ ✓ Starting...
+ ✓ Ready in 1122ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.9s
+ HEAD / 200 in 3312ms
