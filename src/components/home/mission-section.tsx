@@ -41,7 +41,7 @@ export default function MissionSection() {
             )}
             {missionPortrait && (
               <div className="col-span-2 sm:col-span-1">
-                <div className="aspect-square relative">
+                <div className="aspect-square relative" style={{ transform: 'translateY(-50px)' }}>
                   <Image
                     src={missionPortrait.imageUrl}
                     alt={missionPortrait.description}

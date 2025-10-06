@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,7 +14,7 @@ const initialState = {
 };
 
 export default function SummarizeForm() {
-  const [state, formAction] = useFormState(summarizeArticleAction, initialState);
+  const [state, formAction] = useActionState(summarizeArticleAction, initialState);
   const [isPending, setIsPending] = useState(false);
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

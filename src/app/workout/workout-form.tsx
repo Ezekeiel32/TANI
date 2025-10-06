@@ -1,6 +1,6 @@
 'use client';
 
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import { useState } from 'react';
 import { Dumbbell, Clock, AlertCircle } from 'lucide-react';
 import { generateWorkoutAction } from './actions';
@@ -22,7 +22,7 @@ const initialState = {
 };
 
 export default function WorkoutForm() {
-  const [state, formAction] = useFormState(generateWorkoutAction, initialState);
+  const [state, formAction] = useActionState(generateWorkoutAction, initialState);
   const [isPending, setIsPending] = useState(false);
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

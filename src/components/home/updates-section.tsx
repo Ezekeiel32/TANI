@@ -6,18 +6,6 @@ import { Separator } from '@/components/ui/separator';
 const posts = [
   {
     id: 1,
-    title: 'Achieve your fitness goals with expert self-defense training at Lion Cub',
-    href: '#',
-    description:
-      'Are you looking to achieve your fitness goals while also learning valuable self-defense skills? Look no further than Lion Cub, a fitness...',
-    author: {
-      name: 'Eitan Kagan',
-      imageUrl: PlaceHolderImages.find(p => p.id === 'author-eitan-kagan')?.imageUrl || ''
-    },
-    image: PlaceHolderImages.find(p => p.id === 'update-1'),
-  },
-  {
-    id: 2,
     title: 'Empower yourself with self-defense and fitness training at Lion Cub',
     href: '#',
     description:
@@ -26,19 +14,31 @@ const posts = [
       name: 'Eitan Kagan',
       imageUrl: PlaceHolderImages.find(p => p.id === 'author-eitan-kagan')?.imageUrl || ''
     },
-    image: PlaceHolderImages.find(p => p.id === 'update-2'),
+    image: PlaceHolderImages.find(p => p.id === 'update-2'), // IMG_3815.JPG
   },
   {
-    id: 3,
-    title: 'Master self-defense with personalized fitness training at Lion Cub',
+    id: 2,
+    title: 'Sparring and Combat Training Excellence',
     href: '#',
     description:
-      'Are you looking to enhance your self-defense skills while also improving your fitness levels? Look no further than Lion Cub, a...',
+      'Master the art of sparring with our comprehensive combat training program. Learn proper techniques, timing, and strategy for effective fighting...',
     author: {
       name: 'Eitan Kagan',
       imageUrl: PlaceHolderImages.find(p => p.id === 'author-eitan-kagan')?.imageUrl || ''
     },
-    image: PlaceHolderImages.find(p => p.id === 'update-3'),
+    image: PlaceHolderImages.find(p => p.id === 'event-3'), // 4.PNG
+  },
+  {
+    id: 3,
+    title: 'Advanced Training Techniques for Combat Sports',
+    href: '#',
+    description:
+      'Discover advanced training methods and techniques used by professional fighters. Learn the secrets behind effective combat sports training...',
+    author: {
+      name: 'Eitan Kagan',
+      imageUrl: PlaceHolderImages.find(p => p.id === 'author-eitan-kagan')?.imageUrl || ''
+    },
+    image: PlaceHolderImages.find(p => p.id === 'event-1'), // IMG_4638.jpg
   },
 ];
 
@@ -56,7 +56,9 @@ export default function UpdatesSection() {
               {post.image && (
                 <div className="mb-4 aspect-video relative">
                   <Image
-                    className="rounded-lg object-cover"
+                    className={`rounded-lg object-cover ${
+                      ['update-2', 'event-1', 'event-3'].includes(post.image.id) ? 'object-center' : ''
+                    }`}
                     src={post.image.imageUrl}
                     alt={post.image.description}
                     fill

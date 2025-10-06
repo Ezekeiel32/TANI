@@ -7,7 +7,18 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = PlaceHolderImages;
+  // Only use hero-appropriate images in the carousel.
+  // Explicitly EXCLUDES the following which belong to Latest Updates only:
+  // - update-2 (IMG_3815.JPG)
+  // - event-1 (IMG_4638.jpg)
+  // - event-3 (4.PNG)
+  // - event-2 (3.PNG)
+  const images = PlaceHolderImages
+    .filter((img) => ['update-3', 'mission-portrait', 'update-1', 'mission-action', 'hero'].includes(img.id))
+    .sort((a, b) => {
+      const order = ['update-3', 'mission-portrait', 'update-1', 'mission-action', 'hero'];
+      return order.indexOf(a.id) - order.indexOf(b.id);
+    });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,7 +29,7 @@ export default function HeroSection() {
   }, [images.length]);
 
   return (
-    <section className="fixed top-0 left-0 w-full h-screen overflow-hidden bg-black z-0">
+    <section className="relative w-full h-screen overflow-hidden bg-black" style={{ marginTop: '-20px' }}>
 
       {/* Render only the current image */}
       {images[currentImageIndex] && (
@@ -34,23 +45,26 @@ export default function HeroSection() {
             alt={images[currentImageIndex].description}
             fill
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover"
+            style={{
+              objectPosition: images[currentImageIndex].id === 'mission-portrait' ? 'center bottom' : 'center 47%',
+            }}
             priority={currentImageIndex === 0}
           />
         </div>
       )}
 
       {/* Content Overlay */}
-      <div className="relative z-10 h-full flex items-center justify-center">
+      <div className="relative z-10 h-full flex items-center justify-center pt-20">
         <div className="text-center text-white p-4 max-w-4xl mx-auto">
           <h1
-            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-headline font-extrabold tracking-tight leading-tight mb-4 px-4"
+            className="text-4xl md:text-6xl lg:text-7xl font-headline font-extrabold tracking-tight leading-tight mb-4"
             style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}
           >
             Master Your Skills
           </h1>
           <p
-            className="text-lg sm:text-xl md:text-2xl text-slate-200 mb-8 px-4"
+            className="text-lg md:text-xl text-slate-200 mb-8"
             style={{ textShadow: '1px 1px 6px rgba(0,0,0,0.8)' }}
           >
             Personalized Training for Self-Defense and Fitness
@@ -79,3 +93,6 @@ export default function HeroSection() {
     </section>
   );
 }
+
+
+
