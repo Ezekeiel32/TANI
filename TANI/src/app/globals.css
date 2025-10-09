@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 67% 98%;
+    --foreground: 25 70% 15%;
+    --card: 25 70% 94%;
+    --card-foreground: 25 70% 15%;
+    --popover: 45 67% 98%;
+    --popover-foreground: 25 70% 15%;
+    --primary: 25 70% 31%;
+    --primary-foreground: 45 67% 98%;
+    --secondary: 25 70% 92%;
+    --secondary-foreground: 25 70% 15%;
+    --muted: 25 70% 94%;
+    --muted-foreground: 25 70% 40%;
+    --accent: 51 100% 50%;
+    --accent-foreground: 25 70% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 25 70% 85%;
+    --input: 25 70% 90%;
+    --ring: 51 100% 50%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 25 10% 10%;
+    --foreground: 45 60% 95%;
+    --card: 25 10% 10%;
+    --card-foreground: 45 60% 95%;
+    --popover: 25 10% 10%;
+    --popover-foreground: 45 60% 95%;
+    --primary: 45 67% 98%;
+    --primary-foreground: 25 70% 15%;
+    --secondary: 25 10% 18%;
+    --secondary-foreground: 45 60% 95%;
+    --muted: 25 10% 18%;
+    --muted-foreground: 45 60% 60%;
+    --accent: 51 100% 50%;
+    --accent-foreground: 25 70% 15%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 25 10% 25%;
+    --input: 25 10% 25%;
+    --ring: 51 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
