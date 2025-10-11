@@ -1,0 +1,272 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// SQLite does not support native enums; using string fields with constrained values in app code.
+
+model User {
+  id               String           @id @default(cuid())
+  email            String           @unique
+  name             String?
+  phone            String?
+  timezone         String?          @default("America/Phoenix")
+  role             String           @default("CLIENT") // ADMIN | TRAINER | CLIENT
+  stripeCustomerId String?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  trainer          Trainer?
+  bookings         Booking[]
+  paymentMethods   PaymentMethod[]
+  waiverSignatures WaiverSignature[]
+  recurringSeries  RecurringSeries[]
+  
+  // NextAuth.js relations
+  accounts         Account[]
+  sessions         Session[]
+}
+
+model Trainer {
+  id                 String            @id @default(cuid())
+  userId             String            @unique
+  user               User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  defaultCalendarId  String?
+  timezone           String            @default("America/Phoenix")
+  bufferMinutes      Int               @default(0)
+  minNoticeMinutes   Int               @default(60)
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  availabilityTemplates AvailabilityTemplate[]
+  timeOff               TimeOff[]
+  bookings              Booking[]
+  recurringSeries       RecurringSeries[]
+  calendarSync          CalendarSync?
+  googleCredential      GoogleCredential?
+}
+
+model Service {
+  id             String        @id @default(cuid())
+  name           String        @unique
+  durationMinutes Int
+  priceCents     Int
+  currency       String        @default("USD")
+  type           String        @default("PERSONAL") // PERSONAL | GROUP
+  maxCapacity    Int           @default(1)
+  active         Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  bookings       Booking[]
+  recurringSeries RecurringSeries[]
+}
+
+model AvailabilityTemplate {
+  id           String   @id @default(cuid())
+  trainerId    String
+  trainer      Trainer  @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+  weekday      Int      // 0 (Sunday) - 6 (Saturday)
+  startMinutes Int      // minutes from 00:00
+  endMinutes   Int      // minutes from 00:00
+  breaksJson   String?  // JSON-encoded array of breaks
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([trainerId, weekday])
+}
+
+model TimeOff {
+  id        String   @id @default(cuid())
+  trainerId String
+  trainer   Trainer  @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+  start     DateTime
+  end       DateTime
+  reason    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([trainerId, start, end])
+}
+
+model Booking {
+  id           String        @id @default(cuid())
+  trainerId    String
+  trainer      Trainer       @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+  userId       String?
+  user         User?         @relation(fields: [userId], references: [id])
+  serviceId    String
+  service      Service       @relation(fields: [serviceId], references: [id])
+  start        DateTime
+  end          DateTime
+  status       String        @default("TENTATIVE") // TENTATIVE | CONFIRMED | CANCELLED | COMPLETED
+  groupSize    Int           @default(1)
+  seriesId     String?
+  series       RecurringSeries? @relation(fields: [seriesId], references: [id])
+  googleEventId String?
+  holdExpiresAt DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  payments       Payment[]
+  waiverSignature WaiverSignature?
+
+  @@index([trainerId, start, end])
+  @@index([userId])
+}
+
+model RecurringSeries {
+  id         String   @id @default(cuid())
+  trainerId  String
+  trainer    Trainer  @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  serviceId  String
+  service    Service  @relation(fields: [serviceId], references: [id])
+  rrule      String   // iCal RRULE string
+  startDate  DateTime
+  endDate    DateTime?
+  exceptionsJson String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  bookings   Booking[]
+}
+
+model PaymentMethod {
+  id                    String   @id @default(cuid())
+  userId                String
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stripePaymentMethodId String   @unique
+  stripeCustomerId      String
+  isDefault             Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Payment {
+  id                   String        @id @default(cuid())
+  bookingId            String        @unique
+  booking              Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  amountCents          Int
+  currency             String        @default("USD")
+  status               String        @default("PENDING") // PENDING | SUCCEEDED | FAILED | REFUNDED
+  stripePaymentIntentId String?
+  failureReason        String?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  @@index([status])
+}
+
+model WaiverSignature {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookingId  String   @unique
+  booking    Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  signedAt   DateTime
+  ip         String?
+  userAgent  String?
+  pdfUrl     String?
+  createdAt  DateTime @default(now())
+}
+
+model CalendarSync {
+  id         String   @id @default(cuid())
+  trainerId  String   @unique
+  trainer    Trainer  @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+  channelId  String
+  resourceId String
+  expiresAt  DateTime
+  syncToken  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model GoogleCredential {
+  id            String   @id @default(cuid())
+  trainerId     String   @unique
+  trainer       Trainer  @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+  accessToken   String
+  refreshToken  String
+  scope         String?
+  tokenExpiry   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model SlotHold {
+  id        String   @id @default(cuid())
+  trainerId String
+  serviceId String
+  start     DateTime
+  end       DateTime
+  userId    String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([trainerId, start, end])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  entity    String
+  entityId  String
+  userId    String?
+  details   String?
+  createdAt DateTime @default(now())
+}
+
+model IdempotencyKey {
+  id        String   @id @default(cuid())
+  requestId String   @unique
+  response  String
+  createdAt DateTime @default(now())
+}
+
+// NextAuth.js v5 models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

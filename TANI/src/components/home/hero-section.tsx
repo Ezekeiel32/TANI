@@ -54,26 +54,7 @@ export default function HeroSection() {
         </div>
       )}
 
-      {/* Content Overlay */}
-      <div className="relative z-10 h-full flex items-center justify-center pt-28">
-        <div className="text-center text-white p-4 max-w-4xl mx-auto">
-          <h1
-            className="text-4xl md:text-6xl lg:text-7xl font-headline font-extrabold tracking-tight leading-tight mb-4"
-            style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}
-          >
-            Master Your Skills
-          </h1>
-          <p
-            className="text-lg md:text-xl text-slate-200 mb-8"
-            style={{ textShadow: '1px 1px 6px rgba(0,0,0,0.8)' }}
-          >
-            Personalized Training for Self-Defense and Fitness
-          </p>
-          <Button size="lg" variant="default" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            Get Started
-          </Button>
-        </div>
-      </div>
+      {/* Center overlay content intentionally removed per request (no headline/CTA) */}
 
       {/* Carousel Indicators */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">

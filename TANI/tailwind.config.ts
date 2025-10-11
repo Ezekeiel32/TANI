@@ -13,6 +13,7 @@ export default {
         body: ['"PT Sans"', 'sans-serif'],
         headline: ['"Playfair Display"', 'serif'],
         code: ['"Source Code Pro"', 'monospace'],
+        brand: ['"Bebas Neue"', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { useActionState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -14,16 +13,7 @@ const initialState = {
 };
 
 export default function SummarizeForm() {
-  const [state, formAction] = useActionState(summarizeArticleAction, initialState);
-  const [isPending, setIsPending] = useState(false);
-
-  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsPending(true);
-    const formData = new FormData(event.currentTarget);
-    await formAction(formData);
-    setIsPending(false);
-  };
+  const [state, formAction, isPending] = useActionState(summarizeArticleAction, initialState);
 
   return (
     <Card className="max-w-3xl mx-auto">
@@ -34,7 +24,7 @@ export default function SummarizeForm() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleFormSubmit} className="space-y-6">
+        <form action={formAction} className="space-y-6">
           <Textarea
             name="articleText"
             placeholder="Paste your article text here..."

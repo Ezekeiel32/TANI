@@ -1,7 +1,6 @@
 'use client';
 
 import { useActionState } from 'react';
-import { useState } from 'react';
 import { Dumbbell, Clock, AlertCircle } from 'lucide-react';
 import { generateWorkoutAction } from './actions';
 import { Button } from '@/components/ui/button';
@@ -22,16 +21,7 @@ const initialState = {
 };
 
 export default function WorkoutForm() {
-  const [state, formAction] = useActionState(generateWorkoutAction, initialState);
-  const [isPending, setIsPending] = useState(false);
-
-  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsPending(true);
-    const formData = new FormData(event.currentTarget);
-    await formAction(formData);
-    setIsPending(false);
-  };
+  const [state, formAction, isPending] = useActionState(generateWorkoutAction, initialState);
   
   return (
     <Card className="max-w-3xl mx-auto">
@@ -42,7 +32,7 @@ export default function WorkoutForm() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleFormSubmit} className="space-y-6">
+        <form action={formAction} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="fitnessPreferences">Fitness Preferences</Label>

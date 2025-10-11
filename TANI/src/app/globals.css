@@ -55,6 +55,11 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Add a subtle gradient background to make glass header more visible */
+  main {
+    background: linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background)) 100%);
+    background-attachment: fixed;
+  }
 }
 
 @keyframes fadeIn {
@@ -63,5 +68,29 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes sonic-vibrate {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(-0.5px) translateY(-0.5px);
+  }
+  50% {
+    transform: translateX(0.5px) translateY(0.5px);
+  }
+  75% {
+    transform: translateX(-0.5px) translateY(0.5px);
   }
 }
